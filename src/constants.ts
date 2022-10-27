@@ -1,13 +1,13 @@
-import * as types from "../types";
+import * as types from "./types";
 
-export const ALL_VALUES_ARRAY: types.value[] = ["a", "b", "c", "d", "e"];
+export const ALL_VALUES_ARRAY: types.value[] = ["a", "b", "c", "d", "e", "f"];
 export const DIFFICULTY_ARRAY: types.difficulty[] = ["easy", "normal", "hard"];
 
-export const DIFFICULTY_MAP: Record<types.difficulty, types.value[]> = {
-  easy: ["a", "b", "c", "a", "b", "c"],
-  normal: ["a", "b", "c", "d", "a", "b", "c", "d"],
-  hard: ["a", "b", "c", "d", "e", "a", "b", "c", "d", "e"],
-};
+export const DIFFICULTY_MAP: Record<types.difficulty, number> = {
+  easy: 24,
+  hard: 6,
+  normal: 12,
+}
 
 export const COLOURS_MAP: Record<types.value, string> = {
   a: "yellow",
@@ -15,6 +15,7 @@ export const COLOURS_MAP: Record<types.value, string> = {
   c: "orange",
   d: "gray",
   e: "red",
+  f: 'purple'
 };
 
 export const VISUALS_MAP: Record<types.visual, Record<types.value, string>> = {
@@ -23,7 +24,8 @@ export const VISUALS_MAP: Record<types.visual, Record<types.value, string>> = {
     b: "🧟‍♀️",
     c: "👨‍🚒",
     d: "🧛‍♀️",
-    e: "🧙‍♀️",
+    e: "👨‍🚀",
+    f: "🧙‍♀️"
   },
   animals: {
     a: "🐱",
@@ -31,6 +33,7 @@ export const VISUALS_MAP: Record<types.visual, Record<types.value, string>> = {
     c: "🐵",
     d: "🐭",
     e: "🐷",
+    f: "👾",
   },
   transport: {
     a: "🚕",
@@ -38,5 +41,6 @@ export const VISUALS_MAP: Record<types.visual, Record<types.value, string>> = {
     c: "🛵",
     d: "🚐",
     e: "🚒",
+    f: "🚓"
   },
 };

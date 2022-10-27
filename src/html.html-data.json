@@ -1,0 +1,65 @@
+{
+    "version": 1.1,
+    "tags": [
+        {
+            "name": "eg-controller",
+            "description": "Binds the top-level `mg-view` presentational component to the global app state as exposed `model`."
+        },
+        {
+            "name": "eg-view",
+            "description": "The top-level presentation component that effectively serves as the view for the app."
+            
+        },
+        {
+            "name": "eg-card",
+            "description": "Renders a single card to be used in `eg-grid`",
+            "attributes": [
+                {
+                    "name": "value",
+                    "description": "..."
+                },
+                {
+                    "name": "visual",
+                    "description": "...",
+                    "values": [
+                        {
+                            "name": "animals",
+                            "description": "..."
+                        },
+                        {
+                            "name": "characters",
+                            "description": "..."
+                        },
+                        {
+                            "name": "transport",
+                            "description": "..."
+                        }
+                    ]
+                },
+                {
+                    "name": "phase",
+                    "description": "...",
+                    "values": [
+                        {
+                            "name": "hidden",
+                            "description": "..."
+                        },
+                        {
+                            "name": "flipped",
+                            "description": "..."
+                        },
+                        {
+                            "name": "matched",
+                            "description": "..."
+                        }
+                    ]
+                }
+            ]
+            
+        },
+        {
+            "name": "eg-board",
+            "description": "Combines all `mg-card` elements into a grid-like structure to serve as the board"
+        }
+    ]
+}

@@ -1,12 +1,12 @@
 /**
  * ...
  */
-export type phase = "start" | "selecting" | "no-match" | "match" | "finished";
+export type phase = "start" | "selecting" | "no-match" | "match" | "highscore" | "won" | 'lost';
 
 /**
  * ...
  */
-export type value = "a" | "b" | "c" | "d" | "e";
+export type value = "a" | "b" | "c" | "d" | "e" | 'f';
 
 /**
  * ...
@@ -44,4 +44,8 @@ export type state = {
   phase: phase;
   selected: null | number;
   cards: cardsList;
+  visual: visual
+  moves: number
+  highscore: number
+  difficulty: difficulty,
 };

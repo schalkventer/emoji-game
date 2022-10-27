@@ -2,7 +2,7 @@ import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import * as types from "../types";
 
-@customElement("mg-grid")
+@customElement("eg-board")
 export class Component extends LitElement {
   @property() cards: Record<number, types.card> = {};
   @property() visual: types.visual = "animals";
@@ -13,15 +13,8 @@ export class Component extends LitElement {
     }
 
     div {
-      max-width: 20rem;
-      margin: 0 auto;
-    }
-
-    @media (min-width: 25rem) {
-      div {
-        max-width: 40rem;
-        margin: 0 auto;
-      }
+      display: flex;
+      justify-content: center;
     }
 
     ul {
@@ -31,12 +24,19 @@ export class Component extends LitElement {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      max-width: 20rem;
+    }
+
+    @media (min-width: 35rem) {
+      ul {
+        max-width: 30rem;
+      }
     }
 
     li {
-      max-width: ${100 / 2}%;
-      width: 7rem;
-      height: 7rem;
+      max-width: ${100 / 3}%;
+      width: 6.5rem;
+      height: 6.5rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -52,7 +52,7 @@ export class Component extends LitElement {
           ${array.map(
             ({ status, value }) =>
               html`<li>
-                <mg-card phase="${status}" value="${value}"></mg-card>
+                <eg-card phase="${status}" value="${value}"></eg-card>
               </li>`
           )}
         </ul>

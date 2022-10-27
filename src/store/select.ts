@@ -13,9 +13,7 @@ export const flip = (items: types.cardsList, key: number): types.cardsList => {
   };
 };
 
-export const select =
-  (id: number) =>
-  (state: types.state): types.state => {
+export const select = (id: number, state: types.state): types.state => {
     if (state.selected === id) return state;
 
     switch (state.phase) {

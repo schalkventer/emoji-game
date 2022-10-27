@@ -1,5 +1,5 @@
 import * as types from "../types";
-import { DIFFICULTY_MAP } from "../components/constants";
+import { ALL_VALUES_ARRAY } from '../constants'
 
 export const createRandomizer = <T extends unknown>(array: T[]) => {
   let referenceArray: T[] = [...array];
@@ -22,8 +22,8 @@ export const createRandomizer = <T extends unknown>(array: T[]) => {
   return fn;
 };
 
-export const createCardsList = (difficulty: types.difficulty): types.state => {
-  const extract = createRandomizer(DIFFICULTY_MAP[difficulty]);
+export const createState = (): types.state => {
+  const extract = createRandomizer([ ...ALL_VALUES_ARRAY, ...ALL_VALUES_ARRAY ]);
 
   const createCard = (id: number): types.card => ({
     id,
@@ -31,16 +31,15 @@ export const createCardsList = (difficulty: types.difficulty): types.state => {
     status: "hidden",
   });
 
+  const cards: types.cardsList = [1,2,3,4,5,6,7,8,9].reduce((result, id) => ({
+    ...result,
+    [id]: createCard(id)
+  }), {})
+
   return {
     phase: "start",
     selected: null,
-    items: {
-      1: createItem(1),
-      2: createItem(2),
-      3: createItem(3),
-      4: createItem(4),
-      5: createItem(5),
-      6: createItem(6),
-    },
+    visual: 'characters',
+    cards,
   };
 };
