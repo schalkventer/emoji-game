@@ -40,6 +40,9 @@ export const createState = (): types.state => {
     phase: "start",
     selected: null,
     visual: 'characters',
+    difficulty: 'normal',
+    highscore: null,
+    moves: null,
     cards,
   };
 };

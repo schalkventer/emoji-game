@@ -85,9 +85,6 @@ export const select = (id: number, state: types.state): types.state => {
           cards: flip(state.cards, id),
         };
 
-      case "finished":
-        return state;
-
       default:
         throw new Error("Invalid phase");
     }

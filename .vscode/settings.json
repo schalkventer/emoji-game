@@ -1,6 +1,10 @@
 {
+    "source.fixAll.eslint": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
     "html.customData": [
         "./node_modules/@shoelace-style/shoelace/dist/vscode.html-custom-data.json",
         "./html-custom-data.json"
-    ]
+    ],
 }

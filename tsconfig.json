@@ -5,5 +5,8 @@
     "useDefineForClassFields": false,
     "moduleResolution": "node",
     "esModuleInterop": true
-  }
+  },
+  "include": [
+    "src"
+  ]
 }
