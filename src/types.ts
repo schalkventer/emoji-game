@@ -1,7 +1,7 @@
 /**
  * ...
  */
-export type phase = "start" | "selecting" | "no-match" | "match" | "highscore" | "won" | 'lost';
+export type phase = "config" | "start" | "selecting" | "no-match" | "match" | "end";
 
 /**
  * ...
@@ -49,3 +49,9 @@ export type state = {
   highscore: number
   difficulty: difficulty,
 };
+
+export type callback = (state: state) => void
+
+export type options = {
+  createCardsList?: () => cardsList,
+}

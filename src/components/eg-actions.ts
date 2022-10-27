@@ -1,7 +1,7 @@
 import { LitElement, html, css } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import { DIFFICULTY_MAP } from "../constants";
-import { toggleDarkMode } from '../helpers'
+import { toggleDarkMode } from "../helpers";
 import * as types from "../types";
 
 @customElement("eg-actions")
@@ -11,7 +11,7 @@ export class Component extends LitElement {
       box-sizing: border-box;
     }
 
-    aside {
+    .wrapper {
       width: 100%;
       padding: 0.5rem;
       background: white;
@@ -33,6 +33,15 @@ export class Component extends LitElement {
       padding: 0.25rem;
     }
 
+    .field {
+      padding-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: var(--sl-font-size-3x-large);
+      margin: 0 0 2rem;
+    }
+
     sl-progress-ring {
       --size: 3rem;
     }
@@ -42,19 +51,10 @@ export class Component extends LitElement {
     }
   `;
 
-  @property() dialog: "none" | "settings" | "restart";
   @property() moves: number;
   @property() difficulty: types.difficulty;
   @property() phase: types.phase;
   @property() open: boolean = false;
-
-    openSettings() {
-      this.dialog = 'settings'
-    }
-
-    openRestart() {
-      this.dialog = 'restart'
-    }
 
   constructor() {
     super();
@@ -68,45 +68,61 @@ export class Component extends LitElement {
     });
   }
 
+  toggleRestart() {
+    const dialog: any | undefined = this.shadowRoot.querySelector('#restart')
+    if (!dialog) throw new Error('"dialog" is required')
+    if (dialog.open) return dialog.hide()
+    dialog.show()
+  }
+
+  toggleSettings() {
+    const dialog: any | undefined = this.shadowRoot.querySelector('#settings')
+    if (!dialog) throw new Error('"dialog" is required')
+    if (dialog.open) return dialog.hide()
+    dialog.show()
+  }
+
   render() {
     const total = DIFFICULTY_MAP[this.difficulty];
     const remaining = total - this.moves;
     const percentage = (remaining / total) * 100;
     const status = remaining <= 3 ? "warning" : "resting";
-    
+
     const isEnd =
       this.phase === "won" ||
-      this.phase === "highscore" ||
       this.phase === "lost";
 
     return html`
-      <sl-dialog
-        label="New Game"
-        class="dialog-overview"
-        .open="${this.dialog === "restart"}"
-      >
-        <sl-select value="normal" label="Difficulty">
-          <sl-menu-item value="easy">Easy</sl-menu-item>
-          <sl-menu-item value="normal">Normal</sl-menu-item>
-          <sl-menu-item value="hard">Hard</sl-menu-item>
-        </sl-select>
-
-        <sl-button slot="footer" variant="default">Cancel</sl-button>
-        <sl-button slot="footer" variant="primary">Start Game</sl-button>
+      <sl-dialog no-header id="restart">
+        Note that starting a new game will will forfeit the current game.
+        <sl-button slot="footer" variant="default" @click="${this.toggleRestart}"
+          >Cancel</sl-button
+        >
+        <sl-button slot="footer" variant="primary">Confirm</sl-button>
       </sl-dialog>
 
       <sl-dialog
-        label="Settings"
-        class="dialog-overview"
-        .open="${this.dialog === "settings"}"
+        no-header
+        id="settings"
       >
-        <sl-switch>Dark Mode</sl-switch>
+        <h2>Settings</h2>
+          <sl-select class="field" value="characters" label="Icons">
+            <sl-menu-item value="characters">Characters</sl-menu-item>
+            <sl-menu-item value="animals">Animals</sl-menu-item>
+            <sl-menu-item value="transport">Transport</sl-menu-item>
+          </sl-select>
 
-        <sl-button slot="footer" variant="default">Cancel</sl-button>
-        <sl-button slot="footer" variant="primary">Start Game</sl-button>
+          <sl-select class="field" value="auto" label="Theme">
+            <sl-menu-item value="auto">Auto</sl-menu-item>
+            <sl-menu-item value="light">Light</sl-menu-item>
+            <sl-menu-item value="dark">Dark</sl-menu-item>
+          </sl-select>
+        </div>
+        
+        <sl-button slot="footer" variant="default" @click="${this.toggleSettings}">Close</sl-button>
       </sl-dialog>
 
-      <aside label="actions">
+      <div class="wrapper">
         <sl-progress-ring
           value="${percentage}"
           data-status="${status}"
@@ -116,12 +132,17 @@ export class Component extends LitElement {
 
         <ul>
           <li>
-            <sl-button size="large" variant="default" @click="${this.openSettings}">Settings</sl-button>
+            <sl-button
+              size="large"
+              variant="default"
+              @click="${this.toggleSettings}"
+              >Settings</sl-button
+            >
           </li>
 
           <li>
             <sl-button
-              @click="${this.openRestart}"
+              @click="${this.toggleRestart}"
               size="large"
               variant="primary"
               .disabled="${this.phase === "start"}"
@@ -130,7 +151,7 @@ export class Component extends LitElement {
             </sl-button>
           </li>
         </ul>
-      </aside>
+      </div>
     `;
   }
 }

@@ -21,6 +21,8 @@ export const select = (id: number, state: types.state): types.state => {
         return {
           ...state,
           phase: "selecting",
+          selected: id,
+          moves: state.moves + 1,
           cards: flip(state.cards, id),
         };
 
@@ -33,6 +35,8 @@ export const select = (id: number, state: types.state): types.state => {
           return {
             ...state,
             phase: "no-match",
+            selected: null,
+            moves: state.moves + 1,
             cards: flip(state.cards, id),
           };
         }
@@ -40,6 +44,8 @@ export const select = (id: number, state: types.state): types.state => {
         return {
           ...state,
           phase: "match",
+          selected: null,
+          moves: state.moves + 1,
           cards: {
             ...state.cards,
             [state.selected]: {

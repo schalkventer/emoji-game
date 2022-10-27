@@ -6,6 +6,7 @@ export default {
   title: "eg-view",
 };
 
+export const Config = () => html`<eg-view .state="${state.CONFIG}"></eg-view>`;
 export const Start = () => html`<eg-view .state="${state.START}"></eg-view>`;
 export const Selecting = () => html`<eg-view .state="${state.SELECTING}"></eg-view>`;
 export const NoMatch = () => html`<eg-view .state="${state.NO_MATCH}"></eg-view>`;

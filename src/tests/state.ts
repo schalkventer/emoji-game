@@ -1,6 +1,5 @@
 import * as types from "../types";
 import { ALL_VALUES_ARRAY } from "../constants";
-import { mapValues } from 'lodash'
 
 const VALUES = [...ALL_VALUES_ARRAY, ...ALL_VALUES_ARRAY];
 
@@ -18,21 +17,31 @@ const createCardsMock = (array: types.value[]) => {
   );
 };
 
-const CARDS: Record<number, types.card> = createCardsMock(VALUES);
+export const CARDS: Record<number, types.card> = createCardsMock(VALUES);
 
 export const START: types.state = {
   cards: CARDS,
   phase: 'start',
   selected: null,
   visual: 'characters',
-  highscore: 3,
-  moves: 1,
-  difficulty: 'easy',
+  highscore: 5,
+  moves: 0,
+  difficulty: 'normal',
 }
+
+
+export const CONFIG: types.state = {
+  ...START,
+  cards: CARDS,
+  phase: 'config',
+}
+
 
 export const SELECTING: types.state = {
   ...START,
   phase: 'selecting',
+  moves: 1,
+  selected: 7,
   cards: {
     ...START.cards,
     7: { ...CARDS[7], status: "flipped" },
@@ -42,6 +51,7 @@ export const SELECTING: types.state = {
 export const NO_MATCH: types.state = {
   ...START,
   phase: 'no-match',
+  moves: 2,
   cards: {
     ...START.cards,
     1: { ...CARDS[1], status: "flipped" },
@@ -52,6 +62,7 @@ export const NO_MATCH: types.state = {
 export const MATCH: types.state = {
   ...START,
   phase: 'match',
+  moves: 4,
   cards: {
     ...START.cards,
     1: { ...CARDS[1], status: "matched" },
@@ -62,6 +73,7 @@ export const MATCH: types.state = {
 export const TWO_MATCH: types.state = {
   ...START,
   phase: 'match',
+  moves: 10,
   cards: {
     ...START.cards,
     1: { ...CARDS[1], status: "matched" },
@@ -71,10 +83,26 @@ export const TWO_MATCH: types.state = {
   }
 }
 
+export const WON: types.state = {
+  ...START,
+  phase: 'end',
+  moves: 4,
+  cards: Object.entries(START.cards).reduce(
+    (result, [key, card]) => ({
+      ...result,
+      [key]: {
+        ...card,
+        status: 'matched',
+      },
+    }), 
+    {}
+  )
+}
 
 export const HIGHSCORE: types.state = {
   ...START,
-  phase: 'highscore',
+  phase: 'end',
+  moves: 6,
   cards: Object.entries(START.cards).reduce(
     (result, [key, card]) => ({
       ...result,
@@ -86,26 +114,11 @@ export const HIGHSCORE: types.state = {
     {}
   )
 }
-
-export const WON: types.state = {
-  ...START,
-  phase: 'won',
-  cards: Object.entries(START.cards).reduce(
-    (result, [key, card]) => ({
-      ...result,
-      [key]: {
-        ...card,
-        status: 'matched',
-      },
-    }), 
-    {}
-  )
-}
-
 
 export const LOST: types.state = {
   ...START,
-  phase: 'won',
+  moves: 0,
+  phase: 'end',
   cards: Object.entries(START.cards).reduce(
     (result, [key, card]) => ({
       ...result,

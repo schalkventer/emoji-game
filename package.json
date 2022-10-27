@@ -2,15 +2,13 @@
   "name": "emoji-game",
   "license": "ISC",
   "scripts": {
+    "test:jest": "jest",
     "test": "eslint && tsc --noEmit && jest",
-    "storybook": "start-storybook -p 6006",
-    "dev": "vite",
+    "start:storybook": "start-storybook -p 6006",
+    "start": "vite",
     "build": "vite build",
     "prepare": "husky install"
   },
-  "pre-push": [
-    "test:linting"
-  ],
   "devDependencies": {
     "@babel/core": "^7.19.6",
     "@storybook/addon-actions": "^6.5.13",
@@ -23,11 +21,12 @@
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
     "babel-loader": "^8.2.5",
-    "eslint": "^8.2.0",
+    "eslint": "^8.26.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-node": "^4.1.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^27.1.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",

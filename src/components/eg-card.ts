@@ -53,7 +53,7 @@ export class Component extends LitElement {
       color: var(--sl-color-blue-600);
       transform: scale(1.1);
       box-shadow: var(--sl-shadow-large);
-      background-image none;
+      background-image: none;
       cursor: not-allowed;
     }
 

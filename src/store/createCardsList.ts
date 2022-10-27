@@ -22,7 +22,7 @@ export const createRandomizer = <T extends unknown>(array: T[]) => {
   return fn;
 };
 
-export const createState = (): types.state => {
+export const createCardsList = (): types.cardsList => {
   const extract = createRandomizer([ ...ALL_VALUES_ARRAY, ...ALL_VALUES_ARRAY ]);
 
   const createCard = (id: number): types.card => ({
@@ -36,13 +36,5 @@ export const createState = (): types.state => {
     [id]: createCard(id)
   }), {})
 
-  return {
-    phase: "start",
-    selected: null,
-    visual: 'characters',
-    difficulty: 'normal',
-    highscore: null,
-    moves: null,
-    cards,
-  };
-};
+  return cards
+}
