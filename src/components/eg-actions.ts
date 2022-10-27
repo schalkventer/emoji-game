@@ -88,10 +88,6 @@ export class Component extends LitElement {
     const percentage = (remaining / total) * 100;
     const status = remaining <= 3 ? "warning" : "resting";
 
-    const isEnd =
-      this.phase === "won" ||
-      this.phase === "lost";
-
     return html`
       <sl-dialog no-header id="restart">
         Note that starting a new game will will forfeit the current game.
@@ -118,7 +114,7 @@ export class Component extends LitElement {
             <sl-menu-item value="dark">Dark</sl-menu-item>
           </sl-select>
         </div>
-        
+
         <sl-button slot="footer" variant="default" @click="${this.toggleSettings}">Close</sl-button>
       </sl-dialog>
 
@@ -147,7 +143,7 @@ export class Component extends LitElement {
               variant="primary"
               .disabled="${this.phase === "start"}"
             >
-              <span>${isEnd ? "New Game" : "Restart"}</span>
+              <span>${this.phase === 'end' ? "New Game" : "Restart"}</span>
             </sl-button>
           </li>
         </ul>

@@ -26,15 +26,15 @@ describe("store", () => {
     expect(result).toEqual(state.SELECTING);
   });
 
-  it("2", () => {
-    let result = null
-    const store = new Store(state.SELECTING, { createCardsList: () => state.CARDS })
+  // it("2", () => {
+  //   let result = null
+  //   const store = new Store(state.SELECTING, { createCardsList: () => state.CARDS })
 
-    const callback = (state) => { result = state } 
-    store.subscribe(callback)
+  //   const callback = (state) => { result = state } 
+  //   store.subscribe(callback)
 
-    store.select(1)
-    store.unsubscribe(callback)
-    expect(result).toEqual(state.NO_MATCH);
-  });
+  //   store.select(1)
+  //   store.unsubscribe(callback)
+  //   expect(result).toEqual(state.NO_MATCH);
+  // });
 });
