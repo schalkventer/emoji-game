@@ -2,10 +2,9 @@
   "name": "emoji-game",
   "license": "ISC",
   "scripts": {
-    "test:jest": "jest",
-    "test:linting": "eslint && tsc --noEmit",
-    "start:storybook": "start-storybook -p 6006",
-    "start:app": "vite",
+    "test": "eslint && tsc --noEmit && jest",
+    "storybook": "start-storybook -p 6006",
+    "dev": "vite",
     "build": "vite build",
     "prepare": "husky install"
   },

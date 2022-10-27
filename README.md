@@ -9,7 +9,9 @@ A super-simple [progressive web app (PWA)](https://en.wikipedia.org/wiki/Progres
 2. Clone project via `git clone https://github.com/CodeSpace-Academy/emoji-game.git`
 3. Ensure you have the latest LTS (Long-term support) version of [Node.js](https://nodejs.org)
 4. Run `npm install` in the root folder.
-5. Start development environment with `npm start`
+5. Run `npm prepare` to configure testing hooks.
+6. Start development environment with `npm run dev`
+
 
 ## Tooling
 
