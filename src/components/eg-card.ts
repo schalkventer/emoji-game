@@ -6,7 +6,9 @@ import { ALL_VALUES_ARRAY, COLOURS_MAP, VISUALS_MAP } from "../constants";
 @customElement("eg-card")
 export class Component extends LitElement {
   @property() value: types.value;
+
   @property() visual: types.visual = "animals";
+
   @property() phase: "hidden" | "flipped" | "locked" = "hidden";
 
   static styles: CSSResultGroup = css`
@@ -51,20 +53,20 @@ export class Component extends LitElement {
       color: var(--sl-color-blue-600);
       transform: scale(1.1);
       box-shadow: var(--sl-shadow-large);
-      background-image: none;
+      background-image none;
       cursor: not-allowed;
     }
 
     ${unsafeCSS(
-      ALL_VALUES_ARRAY.map((value) => {
-        return `
+      ALL_VALUES_ARRAY.map(
+        (value) => `
                 :host([phase="flipped"][value="${value}"]) button {
                     background-color: var(--sl-color-${COLOURS_MAP[value]}-100);
                     border: 1px solid var(--sl-color-${COLOURS_MAP[value]}-200);
                     color: var(--sl-color-${COLOURS_MAP[value]}-600);
                 }   
-            `;
-      }).join("")
+            `
+      ).join("")
     )}
 
     :host([phase="matched"]) button {
@@ -79,13 +81,13 @@ export class Component extends LitElement {
     }
 
     ${unsafeCSS(
-      ALL_VALUES_ARRAY.map((value) => {
-        return `
+      ALL_VALUES_ARRAY.map(
+        (value) => `
                 :host([phase="locked"][value="${value}"]) button {
                     color: var(--sl-color-${COLOURS_MAP[value]}-600);
                 }   
-            `;
-      }).join("")
+            `
+      ).join("")
     )}
   `;
 
